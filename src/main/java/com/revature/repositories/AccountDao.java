@@ -10,6 +10,6 @@ public interface AccountDao {
 	public List<Account> findByCustId(int id);
 	public Account findByAccId(int id);
 	public boolean insert(Account a);
-	public boolean update(Account a);
+	public boolean updateBal(Account a);
 	
 }

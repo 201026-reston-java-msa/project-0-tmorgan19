@@ -47,8 +47,28 @@ public class AccountDaoImpl implements AccountDao {
 
     @Override
     public Account findByAccId(int id) {
-        // TODO Auto-generated method stub
-        return null;
+        Account a = null;
+		try (Connection conn = ConnectionUtil.getConnection()){
+			
+			String sql = "select * from bank.accounts where accId = ?;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+                int accId = rs.getInt("accId");
+                int custId = rs.getInt("custId");
+                double balance = rs.getDouble("balance");
+                String type = rs.getString("accType");
+                boolean activation = rs.getBoolean("activation");
+
+                a = new Account(accId, custId, balance, type, activation);
+			}
+		} catch (SQLException e){
+			System.out.println("Unable to find by username");
+			e.printStackTrace();
+		}
+		return a;
     }
 
     @Override
@@ -71,9 +91,19 @@ public class AccountDaoImpl implements AccountDao {
     }
 
     @Override
-    public boolean update(Account a) {
-        // TODO Auto-generated method stub
-        return false;
+    public boolean updateBal(Account a) {
+        try (Connection conn = ConnectionUtil.getConnection()){
+			String sql = "UPDATE bank.accounts set balance = ? where accId = ?";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setDouble(1, a.getBalance());
+            stmt.setInt(2, a.getAccId());
+			stmt.executeUpdate();
+			stmt.close();
+		} catch (SQLException e) {
+			System.out.println("Unable to insert customer into table");
+			e.printStackTrace();
+		}
+		return true;
     }
     
 }

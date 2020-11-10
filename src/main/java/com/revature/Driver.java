@@ -19,7 +19,10 @@ public class Driver {
 		System.out.println(c.toString());
 
 		AccountService as = new AccountService(c.getCustId());
-		as.accountMenu();
+		while (as.loop){
+			as.accountMenu();
+		}
+		
 
 
 	}
