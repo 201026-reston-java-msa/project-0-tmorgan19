@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import com.revature.models.Customer;
 import com.revature.services.AccountService;
+import com.revature.services.AdminService;
 import com.revature.services.CustomerService;
 import com.revature.services.EmployeeService;
 
@@ -39,9 +40,11 @@ public class Driver {
 				}
 				break;
 			case 3:
+				AdminService ads = new AdminService();
 
+				while (ads.loop){
+					ads.AdminMenu();
+				}
 		}
-
 	}
-
 }

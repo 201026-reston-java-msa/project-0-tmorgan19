@@ -106,7 +106,7 @@ public class EmployeeService {
         System.out.println("----------------------------------------------");
     }
     
-    private void approveAccount(int accId) {
+    void approveAccount(int accId) {
         Account a = accRepository.findByAccId(accId);
         a.setActivation(true);
         accRepository.update(a);

@@ -155,7 +155,7 @@ public class AccountService {
         repository.update(a);
     }
 
-    private void withdraw(int accId, double amount) {
+    public void withdraw(int accId, double amount) {
         Account a = repository.findByAccId(accId);
         double newBal = a.getBalance() - amount;
         if (newBal > 0){
@@ -167,7 +167,7 @@ public class AccountService {
 
     }
 
-    private void transfer(int fromAcc, int toAcc, double amount) {
+    public void transfer(int fromAcc, int toAcc, double amount) {
         withdraw(fromAcc, amount);
         deposit(toAcc, amount);
     }
