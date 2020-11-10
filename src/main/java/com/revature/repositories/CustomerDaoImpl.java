@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.revature.models.Customer;
@@ -13,8 +14,29 @@ public class CustomerDaoImpl implements CustomerDAO {
 
 	@Override
 	public List<Customer> findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Customer> list = new ArrayList<Customer>();
+		try (Connection conn = ConnectionUtil.getConnection()){
+			
+			String sql = "select * from bank.customers;";
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()){
+				Customer c = null;
+				int custId = rs.getInt("custid");
+				String firstName = rs.getString("firstName");
+				String lastName = rs.getString("lastName");
+				String uname = rs.getString("uname");
+				String pword = rs.getString("pword");
+				c = new Customer(firstName, lastName, uname, pword);
+				c.setCustId(custId);
+				list.add(c);
+			}
+		} catch (SQLException e){
+			System.out.println("Unable to find by username");
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	@Override
@@ -73,5 +95,4 @@ public class CustomerDaoImpl implements CustomerDAO {
 		}
 		return c;
 	}
-
 }

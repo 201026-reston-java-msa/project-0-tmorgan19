@@ -152,7 +152,7 @@ public class AccountService {
         Account a = repository.findByAccId(accId);
         double newBal = a.getBalance() + amount;
         a.setBalance(newBal);
-        repository.updateBal(a);
+        repository.update(a);
     }
 
     private void withdraw(int accId, double amount) {
@@ -160,7 +160,7 @@ public class AccountService {
         double newBal = a.getBalance() - amount;
         if (newBal > 0){
             a.setBalance(newBal);
-            repository.updateBal(a);
+            repository.update(a);
         } else {
             System.out.println("Insufficient funds to withdraw that amount.");
         }
