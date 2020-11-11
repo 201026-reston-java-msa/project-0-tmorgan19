@@ -34,3 +34,6 @@
 2020-11-11 01:02:40 INFO  AccountService:197 - 10.0 withdrawn from account 1
 2020-11-11 01:02:41 INFO  AccountService:183 - 10.0 deposited into account 2
 2020-11-11 01:03:22 INFO  AdminService:79 - Admin logged out
+2020-11-11 01:20:19 INFO  CustomerService:54 - Customer logged in
+2020-11-11 01:20:35 INFO  AccountService:182 - Negative amount entered
+2020-11-11 01:21:17 INFO  AccountService:125 - Customer logged out

@@ -177,6 +177,11 @@ public class AccountService {
             log.info("Deposit into inactive account attempted");
             return;
         }
+        if (amount < 0){
+            System.out.println("Cannot specify a negative amount");
+            log.info("Negative amount entered");
+            return;
+        }
         double newBal = a.getBalance() + amount;
         a.setBalance(newBal);
         repository.update(a);
@@ -188,6 +193,11 @@ public class AccountService {
         if (!a.getActivation()){
             System.out.println("Cannot withdraw from an account unless it's active");
             log.info("Withdrawl from inactive account attempted");
+            return;
+        }
+        if (amount < 0){
+            System.out.println("Cannot specify a negative amount");
+            log.info("Negative amount entered");
             return;
         }
         double newBal = a.getBalance() - amount;
