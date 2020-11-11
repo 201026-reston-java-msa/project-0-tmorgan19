@@ -7,7 +7,10 @@ import com.revature.models.Account;
 import com.revature.repositories.AccountDao;
 import com.revature.repositories.AccountDaoImpl;
 
+import org.apache.log4j.Logger;
+
 public class AccountService {
+    static Logger log = Logger.getLogger(AccountService.class);
     AccountDao repository = null;
     int custId;
     public boolean loop = true;
@@ -36,11 +39,14 @@ public class AccountService {
             registerNewAccount();
         }
         Account a = new Account(this.custId, type);
+        log.info("New bank account applied for");
         if (addAccount(a)){
             System.out.println("Account created and in the system! Note: Account cannot be used until approved by an employee");
+            log.info("New bank account added to database");
         }
         else{
             System.out.println("Account was not able to be registered");
+            log.warn("New bank account was not added to database");
         }
     }
 
@@ -116,6 +122,7 @@ public class AccountService {
 				break;
             case 6: //log out
                 this.loop = false;
+                log.info("Customer logged out");
                 break;
 		}
     }
@@ -153,6 +160,7 @@ public class AccountService {
         double newBal = a.getBalance() + amount;
         a.setBalance(newBal);
         repository.update(a);
+        log.info(amount + " deposited into account " + accId);
     }
 
     public void withdraw(int accId, double amount) {
@@ -161,8 +169,10 @@ public class AccountService {
         if (newBal > 0){
             a.setBalance(newBal);
             repository.update(a);
+            log.info(amount + " withdrawn from account " + accId);
         } else {
             System.out.println("Insufficient funds to withdraw that amount.");
+            log.info("Overdraft withdrawl attempted on account " + accId);
         }
 
     }

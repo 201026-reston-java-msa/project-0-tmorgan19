@@ -1,0 +1,2 @@
+2020-11-10 23:33:25 INFO  CustomerService:57 - Customer logged in
+2020-11-10 23:54:07 INFO  AdminService:100 - Admin logged in

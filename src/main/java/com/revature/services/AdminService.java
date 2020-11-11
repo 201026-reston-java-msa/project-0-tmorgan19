@@ -6,8 +6,10 @@ import com.revature.models.Admin;
 import com.revature.repositories.AdminDao;
 import com.revature.repositories.AdminDaoImpl;
 
+import org.apache.log4j.Logger;
+
 public class AdminService extends EmployeeService {
-    
+    static Logger log = Logger.getLogger(AdminService.class);
     AdminDao adminRepository = null;
 
     public AdminService(){
@@ -74,6 +76,7 @@ public class AdminService extends EmployeeService {
                 break;
             case 7:
                 this.loop = false;
+                log.info("Admin logged out");
                 break;
         }
     }
@@ -93,19 +96,23 @@ public class AdminService extends EmployeeService {
 			if (uname.equalsIgnoreCase(aInDb.getUsername())) {
 				System.out.println("That username exists -- now checking password");
 				if (pword.equals(aInDb.getPassword())){
-					System.out.println("Credentials verified - logged into system");
+                    System.out.println("Credentials verified - logged into system");
+                    log.info("Admin logged in");
 				}
 				else {
-					System.out.println("Password does not match username. Please start from login menu again\n");
+                    System.out.println("Password does not match username. Please start from login menu again\n");
+                    log.info("Incorrect password attempt");
 					adminLogin();
 				}
 			}
 			else {
-				System.out.println("That username does not exist");
+                System.out.println("That username does not exist");
+                log.info("Incorrect username attempt");
 				adminLogin();
 			}
 		} catch (NullPointerException e){
-			System.out.println("Username is not registered with us.");
+            System.out.println("Username is not registered with us.");
+            log.info("Incorrect username attempt");
 			adminLogin();
 		}
         return aInDb;

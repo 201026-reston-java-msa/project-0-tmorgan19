@@ -6,8 +6,10 @@ import com.revature.models.Customer;
 import com.revature.repositories.CustomerDAO;
 import com.revature.repositories.CustomerDaoImpl;
 
-public class CustomerService {
+import org.apache.log4j.Logger;
 
+public class CustomerService {
+	static Logger log = Logger.getLogger(CustomerService.class);
 	CustomerDAO repository = null;
 	
 	public CustomerService() {
@@ -20,9 +22,6 @@ public class CustomerService {
 			System.out.println("2. Register a new user account");
 			
 			Scanner input = new Scanner(System.in);
-			/*
-			 * NEED TO ADD INPUT VALIDATION for non-integers
-			 */
 			int choice = input.nextInt();
 			input.nextLine();
 			if (choice!=1 && choice!=2) {
@@ -52,26 +51,27 @@ public class CustomerService {
 				System.out.println("That username exists -- now checking password");
 				if (pword.equals(cInDb.getPassword())){
 					System.out.println("Credentials verified - logged into system");
+					log.info("Customer logged in");
 				}
 				else {
 					System.out.println("Password does not match username. Please start from login menu again\n");
+					log.info("Incorrect password attempt");
 					loginMenu();
 				}
 			}
 			else {
 				System.out.println("That username does not exist");
+				log.info("Incorrect username attempt");
 				loginMenu();
 			}
 		} catch (NullPointerException e){
 			System.out.println("Username is not registered with us.");
+			log.info("Incorrect username attempt.");
 			loginMenu();
 		}
 		return cInDb;
 	}
 	
-	/*
-	 * Add input validations
-	 */
 	public Customer registerNewCustomer() {
 		Scanner input = new Scanner(System.in);
 		System.out.println("Thank you for choosing to register with us.\n"
@@ -86,11 +86,14 @@ public class CustomerService {
 		
 		Customer c = new Customer(fname, lname, uname, pword);
 		System.out.println("Success! New user account created");
+		log.info("New customer account created");
 		
 		if (!addCustomer(c)) {
 			System.out.println("Database customer insertion unsuccessful");
+			log.warn("New customer account not added to database");
 		} else {
 			System.out.println("Successfully added to database");
+			log.info("New customer account added to database");
 			c = repository.findByUname(uname);
 		}
 		return c;
@@ -99,6 +102,4 @@ public class CustomerService {
 	public boolean addCustomer(Customer c) {
 		return repository.insert(c);
 	}
-
-
 }

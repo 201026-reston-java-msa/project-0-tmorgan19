@@ -13,8 +13,10 @@ import com.revature.repositories.CustomerDaoImpl;
 import com.revature.repositories.EmployeeDAOImpl;
 import com.revature.repositories.EmployeeDao;
 
-public class EmployeeService {
+import org.apache.log4j.Logger;
 
+public class EmployeeService {
+    static Logger log = Logger.getLogger(EmployeeService.class);
     CustomerDAO custRepository = null;
     AccountDao accRepository = null;
     EmployeeDao empRepository = null;
@@ -54,6 +56,7 @@ public class EmployeeService {
                 break;
             case 4:
                 this.loop = false;
+                log.info("Employee logged out");
                 break;
         }
     }
@@ -115,6 +118,7 @@ public class EmployeeService {
         Account a = accRepository.findByAccId(accId);
         a.setActivation(true);
         accRepository.update(a);
+        log.info("Employee approved account " + accId);
     }
 
     public Employee employeeLogin(){
@@ -126,26 +130,30 @@ public class EmployeeService {
         Employee e = login(uname, pword);
         return e;
     }
-    
+
     public Employee login(String uname, String pword) {
 		Employee eInDb = empRepository.findByUname(uname);
 		try {
 			if (uname.equalsIgnoreCase(eInDb.getUsername())) {
 				System.out.println("That username exists -- now checking password");
 				if (pword.equals(eInDb.getPassword())){
-					System.out.println("Credentials verified - logged into system");
+                    System.out.println("Credentials verified - logged into system");
+                    log.info("Employee logged in");
 				}
 				else {
-					System.out.println("Password does not match username. Please start from login menu again\n");
+                    System.out.println("Password does not match username. Please start from login menu again\n");
+                    log.info("Incorrect password attempt");
 					employeeLogin();
 				}
 			}
 			else {
-				System.out.println("That username does not exist");
+                System.out.println("That username does not exist");
+                log.info("Incorrect username attempt");
 				employeeLogin();
 			}
 		} catch (NullPointerException e){
-			System.out.println("Username is not registered with us.");
+            System.out.println("Username is not registered with us.");
+            log.info("Incorrect username attempt");
 			employeeLogin();
 		}
 		return eInDb;
