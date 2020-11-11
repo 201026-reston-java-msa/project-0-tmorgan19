@@ -40,12 +40,6 @@ public class CustomerDaoImpl implements CustomerDAO {
 	}
 
 	@Override
-	public Customer findById(int id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
 	public boolean insert(Customer c) {
 		try (Connection conn = ConnectionUtil.getConnection()){
 			String sql = "INSERT INTO bank.customers (firstName, lastName, uname, pword)"
@@ -62,12 +56,6 @@ public class CustomerDaoImpl implements CustomerDAO {
 			e.printStackTrace();
 		}
 		return true;
-	}
-
-	@Override
-	public boolean update(Customer c) {
-		// TODO Auto-generated method stub
-		return false;
 	}
 
 	@Override

@@ -18,7 +18,7 @@ public class CustomerService {
 	public Customer loginMenu(){
 		{
 			Customer c = null;
-			System.out.println("1. Login to existing user account");
+			System.out.println("\n1. Login to existing user account");
 			System.out.println("2. Register a new user account");
 			
 			Scanner input = new Scanner(System.in);

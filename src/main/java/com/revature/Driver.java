@@ -22,7 +22,7 @@ public class Driver {
 	}
 
 	public static void loginPage(){
-		System.out.println("Are you logging in as a");
+		System.out.println("\nWould you like to log in as a");
 		System.out.println("1. Customer");
 		System.out.println("2. Employee");
 		System.out.println("3. Admin");
@@ -34,7 +34,6 @@ public class Driver {
 				CustomerService cs = new CustomerService();
 				Customer c;
 				c = cs.loginMenu();
-				System.out.println(c.toString());
 				AccountService as = new AccountService(c.getCustId());
 				while (as.loop){
 					as.accountMenu();

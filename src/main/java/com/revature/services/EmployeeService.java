@@ -29,7 +29,7 @@ public class EmployeeService {
     }
 
     public void EmployeeMenu(){
-        System.out.println("Welcome to your employee home page. What would you like to do?");
+        System.out.println("\nWelcome to your employee home page. What would you like to do?");
         System.out.println("1. View all customers");
         System.out.println("2. View all bank accounts");
         System.out.println("3. Approve account applications");
@@ -123,7 +123,7 @@ public class EmployeeService {
 
     public Employee employeeLogin(){
         Scanner input = new Scanner(System.in);
-        System.out.println("Please input your username:");
+        System.out.println("\nPlease input your username:");
         String uname = input.nextLine();
         System.out.println("Please input your password:");
         String pword = input.nextLine();

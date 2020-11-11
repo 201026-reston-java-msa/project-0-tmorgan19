@@ -1,2 +1,36 @@
 2020-11-10 23:33:25 INFO  CustomerService:57 - Customer logged in
 2020-11-10 23:54:07 INFO  AdminService:100 - Admin logged in
+2020-11-11 00:03:52 INFO  CustomerService:69 - Incorrect username attempt.
+2020-11-11 00:04:13 INFO  CustomerService:54 - Customer logged in
+2020-11-11 00:07:41 INFO  CustomerService:54 - Customer logged in
+2020-11-11 00:08:57 INFO  AccountService:125 - Customer logged out
+2020-11-11 00:09:06 INFO  EmployeeService:156 - Incorrect username attempt
+2020-11-11 00:09:18 INFO  EmployeeService:141 - Employee logged in
+2020-11-11 00:09:55 INFO  EmployeeService:59 - Employee logged out
+2020-11-11 00:17:24 INFO  CustomerService:54 - Customer logged in
+2020-11-11 00:17:54 INFO  AccountService:162 - Deposit into inactive account attempted
+2020-11-11 00:18:07 INFO  AccountService:125 - Customer logged out
+2020-11-11 00:23:11 INFO  CustomerService:54 - Customer logged in
+2020-11-11 00:23:39 INFO  AccountService:190 - Withdrawl from inactive account attempted
+2020-11-11 00:23:51 INFO  AccountService:125 - Customer logged out
+2020-11-11 00:27:07 INFO  AdminService:100 - Admin logged in
+2020-11-11 00:34:16 INFO  AccountService:190 - Withdrawl from inactive account attempted
+2020-11-11 00:53:47 INFO  AdminService:79 - Admin logged out
+2020-11-11 00:59:22 INFO  CustomerService:89 - New customer account created
+2020-11-11 00:59:22 INFO  CustomerService:96 - New customer account added to database
+2020-11-11 00:59:46 INFO  AccountService:42 - New bank account applied for
+2020-11-11 00:59:46 INFO  AccountService:45 - New bank account added to database
+2020-11-11 01:00:03 INFO  AccountService:125 - Customer logged out
+2020-11-11 01:00:19 INFO  EmployeeService:145 - Incorrect password attempt
+2020-11-11 01:00:25 INFO  EmployeeService:141 - Employee logged in
+2020-11-11 01:01:17 INFO  EmployeeService:121 - Employee approved account 5
+2020-11-11 01:01:22 INFO  EmployeeService:59 - Employee logged out
+2020-11-11 01:01:31 INFO  CustomerService:54 - Customer logged in
+2020-11-11 01:01:47 INFO  AccountService:183 - 100.0 deposited into account 5
+2020-11-11 01:01:51 INFO  AccountService:125 - Customer logged out
+2020-11-11 01:02:01 INFO  CustomerService:54 - Customer logged in
+2020-11-11 01:02:13 INFO  AccountService:125 - Customer logged out
+2020-11-11 01:02:19 INFO  AdminService:100 - Admin logged in
+2020-11-11 01:02:40 INFO  AccountService:197 - 10.0 withdrawn from account 1
+2020-11-11 01:02:41 INFO  AccountService:183 - 10.0 deposited into account 2
+2020-11-11 01:03:22 INFO  AdminService:79 - Admin logged out

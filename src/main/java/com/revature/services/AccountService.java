@@ -54,7 +54,7 @@ public class AccountService {
         return repository.insert(a);
     }
     public void accountMenu(){
-		System.out.println("Welcome to your user homepage. What would you like to do?");
+		System.out.println("\nWelcome to your user homepage. What would you like to do?");
 		System.out.println("1. View all my bank accounts");
 		System.out.println("2. Make a withdrawl");
 		System.out.println("3. Make a deposit");
@@ -101,7 +101,7 @@ public class AccountService {
                 }
                     break;
             case 4: //transfer
-                if (this.hasActiveAccount()){
+                if (this.hasTwoActiveAccounts()){
                     viewMyAccounts();
                     System.out.println("Which account would you like to take money from? Type the Account ID");
                     int fromAcc = input.nextInt();
@@ -113,7 +113,7 @@ public class AccountService {
 
                 }
                 else {
-                    System.out.println("Cannot perform this action since you do not have any activated accounts");
+                    System.out.println("Cannot perform this action since you do not have two activated accounts");
                     this.accountMenu();
                 }
                 break;
@@ -155,8 +155,28 @@ public class AccountService {
         return value;
     }
 
+    public boolean hasTwoActiveAccounts(){
+        boolean value = false;
+        int i = 0;
+        List<Account> myAccounts = repository.findByCustId(custId);
+        for (Account a : myAccounts){
+            if (a.getActivation()){
+                i++;
+            }
+        }
+        if (i >=2){
+            value = true;
+        }
+        return value;
+    }
+
     public void deposit(int accId, double amount){
         Account a = repository.findByAccId(accId);
+        if (!a.getActivation()){
+            System.out.println("Cannot deposit into an account unless it's active");
+            log.info("Deposit into inactive account attempted");
+            return;
+        }
         double newBal = a.getBalance() + amount;
         a.setBalance(newBal);
         repository.update(a);
@@ -165,6 +185,11 @@ public class AccountService {
 
     public void withdraw(int accId, double amount) {
         Account a = repository.findByAccId(accId);
+        if (!a.getActivation()){
+            System.out.println("Cannot withdraw from an account unless it's active");
+            log.info("Withdrawl from inactive account attempted");
+            return;
+        }
         double newBal = a.getBalance() - amount;
         if (newBal > 0){
             a.setBalance(newBal);
