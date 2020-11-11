@@ -11,14 +11,22 @@ import com.revature.services.CustomerService;
 import com.revature.services.EmployeeService;
 
 public class Driver {
+	static boolean cont = true;
 
 	public static void main(String[] args) {
 		
-		System.out.println("Welcome to the banking application. \nPlease choose from the following options: \n");
+		System.out.println("Welcome to the banking application. \nPlease select how you would like to log in.");
+		while (cont){
+			loginPage();
+		}
+	}
+
+	public static void loginPage(){
 		System.out.println("Are you logging in as a");
 		System.out.println("1. Customer");
 		System.out.println("2. Employee");
 		System.out.println("3. Admin");
+		System.out.println("4. Exit program");
 		Scanner input = new Scanner(System.in);
 		int choice = input.nextInt();
 		switch (choice){
@@ -47,6 +55,10 @@ public class Driver {
 				while (ads.loop){
 					ads.AdminMenu();
 				}
+				break;
+			case 4:
+				cont = false;
+				break;
 		}
 	}
 }
