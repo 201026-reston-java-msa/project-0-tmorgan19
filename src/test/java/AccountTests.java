@@ -30,12 +30,14 @@ public class AccountTests {
     public void testWIthdawIfNoFunds(){
         when(daoMock.findByAccId(1)).thenReturn(new Account(1, 1, 0, "Savings", true));
         service.withdraw(1, 1000);
+        // Test passess if no error
     }
 
     @Test
     public void testDepositIfNoActive(){
         when(daoMock.findByAccId(1)).thenReturn(new Account(1, 1, 0, "Savings", false));
         service.deposit(1, 100);
+        // Test passes if no error
     }
 
 }

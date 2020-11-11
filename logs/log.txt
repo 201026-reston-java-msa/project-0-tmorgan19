@@ -37,3 +37,10 @@
 2020-11-11 01:20:19 INFO  CustomerService:54 - Customer logged in
 2020-11-11 01:20:35 INFO  AccountService:182 - Negative amount entered
 2020-11-11 01:21:17 INFO  AccountService:125 - Customer logged out
+2020-11-11 07:56:11 INFO  AdminService:106 - Admin logged in
+2020-11-11 07:56:40 INFO  AdminService:131 - Admin deactivated account 2
+2020-11-11 07:56:40 INFO  AdminService:85 - Admin logged out
+2020-11-11 07:57:01 INFO  CustomerService:54 - Customer logged in
+2020-11-11 07:57:08 INFO  AccountService:125 - Customer logged out
+2020-11-11 07:57:51 INFO  AdminService:108 - Admin logged in
+2020-11-11 07:58:22 INFO  AdminService:133 - Admin deactivated account 2

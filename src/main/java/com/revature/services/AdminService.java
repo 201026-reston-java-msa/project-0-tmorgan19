@@ -2,6 +2,7 @@ package com.revature.services;
 
 import java.util.Scanner;
 
+import com.revature.models.Account;
 import com.revature.models.Admin;
 import com.revature.repositories.AdminDao;
 import com.revature.repositories.AdminDaoImpl;
@@ -24,11 +25,12 @@ public class AdminService extends EmployeeService {
         System.out.println("4. Make a deposit");
         System.out.println("5. Make a withdrawl");
         System.out.println("6. Make a transfer");
-        System.out.println("7. Log out");
+        System.out.println("7. Deactivate an account");
+        System.out.println("8. Log out");
 
         Scanner input = new Scanner(System.in);
         int choice = input.nextInt();
-        if (choice>7){
+        if (choice>8){
             System.out.println("Please input a valid number");
             AdminMenu();
         }
@@ -75,6 +77,12 @@ public class AdminService extends EmployeeService {
                 as3.transfer(fromAcc, toAcc, amount3);
                 break;
             case 7:
+                viewAllAccounts();
+                System.out.println("Which account would you like to deactivate? Please specify a single account ID");
+                int accId4 = input.nextInt();
+                deactivateAccount(accId4);
+                break;
+            case 8:
                 this.loop = false;
                 log.info("Admin logged out");
                 break;
@@ -116,5 +124,12 @@ public class AdminService extends EmployeeService {
 			adminLogin();
 		}
         return aInDb;
+    }
+
+    void deactivateAccount(int accId) {
+        Account a = accRepository.findByAccId(accId);
+        a.setActivation(false);
+        accRepository.update(a);
+        log.info("Admin deactivated account " + accId);
     }
 }
