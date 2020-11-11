@@ -2,7 +2,9 @@ package com.revature;
 
 import java.util.Scanner;
 
+import com.revature.models.Admin;
 import com.revature.models.Customer;
+import com.revature.models.Employee;
 import com.revature.services.AccountService;
 import com.revature.services.AdminService;
 import com.revature.services.CustomerService;
@@ -32,16 +34,16 @@ public class Driver {
 				break;
 			case 2:
 				EmployeeService es = new EmployeeService();
-				/**
-				 * Need to add login verification
-				 */
+				Employee e;
+				e = es.employeeLogin();
 				while (es.loop){
 					es.EmployeeMenu();
 				}
 				break;
 			case 3:
 				AdminService ads = new AdminService();
-
+				Admin a;
+				a = ads.adminLogin();
 				while (ads.loop){
 					ads.AdminMenu();
 				}

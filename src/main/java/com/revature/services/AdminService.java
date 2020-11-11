@@ -2,10 +2,17 @@ package com.revature.services;
 
 import java.util.Scanner;
 
+import com.revature.models.Admin;
+import com.revature.repositories.AdminDao;
+import com.revature.repositories.AdminDaoImpl;
+
 public class AdminService extends EmployeeService {
     
+    AdminDao adminRepository = null;
+
     public AdminService(){
         super();
+        adminRepository = new AdminDaoImpl();
     }
     public void AdminMenu(){
         System.out.println("Welcome to your admin home page. What would you like to do?");
@@ -70,5 +77,37 @@ public class AdminService extends EmployeeService {
                 break;
         }
     }
+    public Admin adminLogin(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please input your username:");
+        String uname = input.nextLine();
+        System.out.println("Please input your password:");
+        String pword = input.nextLine();
+        Admin a = adlogin(uname, pword);
+        return a;
+    }
     
+    public Admin adlogin(String uname, String pword) {
+		Admin aInDb = adminRepository.findByUname(uname);
+		try {
+			if (uname.equalsIgnoreCase(aInDb.getUsername())) {
+				System.out.println("That username exists -- now checking password");
+				if (pword.equals(aInDb.getPassword())){
+					System.out.println("Credentials verified - logged into system");
+				}
+				else {
+					System.out.println("Password does not match username. Please start from login menu again\n");
+					adminLogin();
+				}
+			}
+			else {
+				System.out.println("That username does not exist");
+				adminLogin();
+			}
+		} catch (NullPointerException e){
+			System.out.println("Username is not registered with us.");
+			adminLogin();
+		}
+        return aInDb;
+    }
 }

@@ -5,20 +5,25 @@ import java.util.Scanner;
 
 import com.revature.models.Account;
 import com.revature.models.Customer;
+import com.revature.models.Employee;
 import com.revature.repositories.AccountDao;
 import com.revature.repositories.AccountDaoImpl;
 import com.revature.repositories.CustomerDAO;
 import com.revature.repositories.CustomerDaoImpl;
+import com.revature.repositories.EmployeeDAOImpl;
+import com.revature.repositories.EmployeeDao;
 
 public class EmployeeService {
 
     CustomerDAO custRepository = null;
     AccountDao accRepository = null;
+    EmployeeDao empRepository = null;
     public boolean loop = true;
     
     public EmployeeService(){
         custRepository = new CustomerDaoImpl();
         accRepository = new AccountDaoImpl();
+        empRepository = new EmployeeDAOImpl();
     }
 
     public void EmployeeMenu(){
@@ -111,4 +116,38 @@ public class EmployeeService {
         a.setActivation(true);
         accRepository.update(a);
     }
+
+    public Employee employeeLogin(){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Please input your username:");
+        String uname = input.nextLine();
+        System.out.println("Please input your password:");
+        String pword = input.nextLine();
+        Employee e = login(uname, pword);
+        return e;
+    }
+    
+    public Employee login(String uname, String pword) {
+		Employee eInDb = empRepository.findByUname(uname);
+		try {
+			if (uname.equalsIgnoreCase(eInDb.getUsername())) {
+				System.out.println("That username exists -- now checking password");
+				if (pword.equals(eInDb.getPassword())){
+					System.out.println("Credentials verified - logged into system");
+				}
+				else {
+					System.out.println("Password does not match username. Please start from login menu again\n");
+					employeeLogin();
+				}
+			}
+			else {
+				System.out.println("That username does not exist");
+				employeeLogin();
+			}
+		} catch (NullPointerException e){
+			System.out.println("Username is not registered with us.");
+			employeeLogin();
+		}
+		return eInDb;
+	}
 }
